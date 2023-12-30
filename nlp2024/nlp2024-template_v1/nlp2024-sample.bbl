@@ -1,0 +1,34 @@
+\begin{thebibliography}{1}
+
+\bibitem{Web1}
+著者氏名.
+\newblock ホームページタイトル, 2017.
+\newblock \url{http://www.pluto.ai.kyutech.ac.jp/NLP/}.
+
+\bibitem{JLREQ}
+{W3C日本語組版タスクフォース．日本語組版の要件（日本語版）}, （2020-11閲覧）.
+\newblock \url{https://www.w3.org/TR/jlreq/}.
+
+\bibitem{Article_01}
+FirstName LastName.
+\newblock Title of the article.
+\newblock {\em Journal of Natural Language Processing}, Vol.~13, No.~1, pp.
+  251--258, 2006.
+
+\bibitem{Book_02}
+FirstNameA LastNameA, FirstNameB LastNameB, FirstNameC LastNameC, and
+  FirstNameD LastNameD.
+\newblock {\em Title of The Book}.
+\newblock The Association for Natural Language Processing, 1988.
+
+\bibitem{Inproc_03}
+著者氏名1, 著者氏名2, 著者氏名3.
+\newblock 論文タイトル.
+\newblock  プロシーディングスの名前, 1986.
+
+\bibitem{Techrep_05}
+著者氏名1, 著者氏名2, 著者氏名3, 著者氏名4.
+\newblock 技報タイトル.
+\newblock Technical report, 出版者, 1985.
+
+\end{thebibliography}
