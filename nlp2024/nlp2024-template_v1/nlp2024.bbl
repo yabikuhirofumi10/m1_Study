@@ -1,0 +1,56 @@
+\begin{thebibliography}{10}
+
+\bibitem{Article_02}
+山澤美由紀, 吉村宏樹.
+\newblock Amazonレビュー文の有用性判別実験.
+\newblock 情報処理学会研究報告自然言語処理（NL）, 53(2006-NL-173)号, pp.
+  15--20, 2006.
+
+\bibitem{Article_03}
+小橋賢介, 雨宮佑基, 酒井哲也.
+\newblock 有用なレビューを抽出するための比較文フィルタリングの検討.
+\newblock {\em DEIM Forum 2021 H11-4}, 2021.
+
+\bibitem{Article_04}
+Hong Hong, Di~Xu, G．AlanWang, WeiguoFan．
+\newblock Understanding the determinants of online review helpfulness: A
+  meta-analytic investigation.
+\newblock {\em Support Systems}, Vol. 102, pp. 1--11, 2017.
+
+\bibitem{Article_05}
+曽田颯人, 白井清昭.
+\newblock 商品レビューの複数の観点からの有用性の評価.
+\newblock 言語処理学会 第27回年次大会 発表論文集, 2021.
+
+\bibitem{JLREQ}
+{W3C日本語組版タスクフォース．日本語組版の要件（日本語版）}, （2020-11閲覧）.
+\newblock \url{https://www.w3.org/TR/jlreq/}.
+
+\bibitem{Article_01}
+FirstName LastName.
+\newblock Title of the article.
+\newblock {\em Journal of Natural Language Processing}, Vol.~13, No.~1, pp.
+  251--258, 2006.
+
+\bibitem{Book_02}
+FirstNameA LastNameA, FirstNameB LastNameB, FirstNameC LastNameC, and
+  FirstNameD LastNameD.
+\newblock {\em Title of The Book}.
+\newblock The Association for Natural Language Processing, 1988.
+
+\bibitem{Inproc_03}
+著者氏名1, 著者氏名2, 著者氏名3.
+\newblock 論文タイトル.
+\newblock  プロシーディングスの名前, 1986.
+
+\bibitem{Techrep_05}
+著者氏名1, 著者氏名2, 著者氏名3, 著者氏名4.
+\newblock 技報タイトル.
+\newblock Technical report, 出版者, 1985.
+
+\bibitem{Web_06}
+著者氏名.
+\newblock ホームページタイトル, 2017.
+\newblock \url{http://www.pluto.ai.kyutech.ac.jp/NLP/}.
+
+\end{thebibliography}
