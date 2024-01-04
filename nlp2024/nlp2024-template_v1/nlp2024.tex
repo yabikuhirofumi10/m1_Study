@@ -15,7 +15,7 @@
 \usepackage{graphicx,xcolor}  % グラフィックス関連
 \usepackage{pxrubrica}        % ルビ
 \usepackage{url}
-
+\usepackage{here}
 %% option 不要な場合はコメントアウト
 %\usepackage{jlreq-deluxe}     % 多書体化（otf パッケージは使用しない）
 \usepackage{bxjalipsum}       % ダミーテキスト
@@ -59,7 +59,11 @@ ${}^{1}$琉球大学大学院 理工学研究科 知能情報プログラム\\
 %NLP2022より，読者の論文理解を促進するため，所定のフォーマットの一部として投稿論文の概要を記載することにした（NLP2021までは概要は記載する必要がなく，ほぼ全ての論文で概要が存在しなかった）．
 %分量の目安は日本語／英語ともに「8〜13行」とする．概要が8〜13行を満たさなくても賞選考対象外や不採択になることはない．ただし，極端に短い／長い概要にならないように留意すること．
 %日本語の場合は，文書クラスにより一行23文字に設定されているため，161文字から299文字相当になる．
-最後に記入
+最後に記入\\
+aaaaaaaa\\
+aaaaaaaa\\
+aaaaaaaa\\
+aaaaaaaaa\\
 \end{abstract}
 
 \section{はじめに}
@@ -70,31 +74,155 @@ ${}^{1}$琉球大学大学院 理工学研究科 知能情報プログラム\\
 
 また，Hongらは有用性であるかどうかの決定要因は，一貫性がなく有用性の測定法，レビュープラットホーム，製品タイプの3つの要因によって異なると主張している\cite{Article_04}．このように有用性の基準については多く議論されており，様々な観点から有用性を評価する研究なども行われている．
 
-曽田らが行った「商品レビューの複数の観点からの有用性の評価\cite{Article_05}」では有用性を「評価表現に対する根拠がある」，「商品に関係のある言及が多い」，「他の商品と比較している」，「実際に商品を使用した（あるいはしていない）と推測できる」，「評価（レーティング）に対する根拠がある」，「分量が多い」，「文章が読みやすい」といった7つの観点に分類し，前者3つの観点の評価を実現した．しかし，有用性の様々な視点からの評価という面においては実現できている3つの観点では不十分であると言える．例えば，「商品に関係のある言及が多い」という観点で商品配送についてのレビューは除外されているが，ユーザーによってはこのレビューを重要視するケースも考えられる．また，「関係のある言及」がどのようなものか明瞭であるとユーザーにとってさらに有意である．
+曽田らが行った「商品レビューの複数の観点からの有用性の評価\cite{Article_05}」では有用性を「評価表現に対する根拠がある」，「商品に関係のある言及が多い」，「他の商品と比較している」，「実際に商品を使用した（あるいはしていない）と推測できる」，「評価（レーティング）に対する根拠がある」，「文量が多い」，「文章が読みやすい」といった7つの観点に分類し，前者3つの観点の評価を実現した．しかし，有用性の様々な視点からの評価という面においては実現できている3つの観点では不十分であると言える．例えば，「商品に関係のある言及が多い」という観点で商品配送についてのレビューは除外されているが，ユーザーによってはこのレビューを重要視するケースも考えられる．また，「関係のある言及」がどのようなものか明瞭であるとユーザーにとって多角的な評価となりさらに有意である．
 
-本研究では，レビューを収集する過程でECサイトのレビュー体系を分析し，先行研究\cite{Article_04, Article_05}の知見や消費者庁「消費者意識基本調査\footnote{https://www.caa.go.jp/policies/policy/consumer\_research/white\_paper}」を踏まえ，レビューのラベルを考案，付与を行いそれぞれのカテゴリに自動で分類できるような自然言処理モデルの構築に取り組んだ．
+本研究では，レビューを収集する過程でECサイトのレビュー体系を分析し，先行研究\cite{Article_04, Article_05}の知見や消費者庁「消費者意識基本調査\cite{url1}」を踏まえ，レビューのラベルの考案と付与を行いそれぞれのカテゴリに自動で分類できるような自然言処理モデルの構築に取り組んだ．
 
 \section{実験設計}
 
-\subsection{}
+\subsection{ラベル考案}
+Amazonカスタマーレビューよりレビューを収集し，商品タイプによるレビュー傾向の違いを観察した．その結果，電化製品や日用品など継続的に利用する商品と映画や漫画，ゲームなど一時的に利用する商品との間に異なるレビュー傾向が見られた．
+\begin{table}[t]
+  \caption{それぞれのタイプのレビュー例}
+  \label{table1}
+  %\scriptsize
+  \centering
+  \begin{tabular}{|l|l|}
+    \hline
+    & レビュー例 \\
+    \hline
+    ゲーム（ピクミン）    & 
+    \begin{tabular}{p{4cm}}
+    ピクミンは可愛いし内容も面白い。
+他の皆さんが言ってるようにプレイ時間が短いので星4つ。
+永遠に遊べるピクミン作って欲しいな。
+    \end{tabular}\\
+    \hline
+    電化製品（掃除機）  & 
+    \begin{tabular}{p{4cm}}
+    吸引力もしっかりあり、コード付きなので使いたい時に充電器にせず使えていいですが音は大きめです
+      \end{tabular}\\
+    \hline
+    \end{tabular}
+\end{table}
+表\ref{table1}にそれぞれのタイプのレビュー例を示す．
 
-\subsection{Word版テンプレート}
-Word版テンプレートは，前述のLaTeX用に定義された文書クラスに準拠して作成している．
-Word版でも，数式や箇条書きなどはWord上の機能を用いて挿入することができる．
-
-LaTeX版文書クラスでの禁止事項およびWord版で投稿される論文が満たすべき規定については，\ref{sec:contents-format1}節および\ref{sec:contents-format2}節に詳述する．
+ゲームのレビューでは「面白い」や「楽しい」といった一時的な感情表現を用いて評価をする傾向が見られるのに対して，電化製品のレビューでは機能面での実用性を述べた評価をする傾向が見られた．この分析より本研究では商品タイプを「一時的に利用する商品」と「継続的に利用する商品」という2タイプに分けることとし，これらに付随するレビューの傾向が異なると仮定する．また上記2タイプの商品には「商品内容に触れた評価レビュー」，「商品内容に触れない評価レビュー」，「評価をしていないもの」の3タイプのレビューが見られ，この3タイプのレビューをさらに細分化したレビューの評価基準をラベルとした．なお今回は継続的に利用する商品に着目し，分類モデルの構築に取り組んだ．
 
 
-\subsection{クレジット}
-LaTeX版の文書クラス (\code{nlp*.cls}) は，東京大学宮尾研究室 朝倉卓人氏のご厚意により年次大会用に提供していただいた．
+収集したレビューと前述した先行研究，消費者庁「消費者意識基本調査\cite{url1}」の商品やサービスを購入する際に重視する項目を基にラベルを設定したラベルを以下に示す．
 
-また，Word版のテンプレートはLaTeX版のフォーマットに従って理化学研究所 吉野幸一郎氏により作成していただいた．
+\paragraph{ラベル1} 商品機能に触れたレビュー
+
+これはほにゃらら
+\paragraph{ラベル2} 別の商品内容のレビュー
+\paragraph{ラベル3} 別の商品との比較を交えたレビュー
+\paragraph{ラベル4} 商品価格に触れたレビュー
+\paragraph{ラベル5} ユースケースを述べたレビュー
+\paragraph{ラベル6} 簡易的な感想表現のみのレビュー
+\paragraph{ラベル7} 商品状態に触れたレビュー
+\paragraph{ラベル8} 商品配送に触れたレビュー
+\paragraph{ラベル9} 批評をしていないもの
+\subsection{実験手順}
+\subsection{評価手法}
+
+%\ref{sec:contents-format1}節および\ref{sec:contents-format2}節に詳述する．
 
 
 
 
-\section{投稿論文の必須要件}
-\label{sec:contents-format1}
+
+\section{実験結果と考察}
+%\label{sec:contents-format1}
+\begin{table}[H]
+  \caption{100件のレビューによる評価}
+  \label{table2}
+  %\scriptsize
+  \centering
+  \begin{tabular}{|l|l|l|l|l|}
+    \hline
+    & accuracy & recal & precision & f1 score \\
+    \hline
+    ラベル1   & 0  & 0       & 0         & 0\\
+    \hline
+    ラベル2  & 0  & 0       & 0         & 0\\
+    \hline
+    ラベル3   & 0  & 0       & 0         & 0\\
+    \hline
+    ラベル4  & 0  & 0       & 0         & 0\\
+    \hline
+    ラベル5   & 0  & 0       & 0         & 0\\
+    \hline
+    ラベル6   & 0  & 0       & 0         & 0\\
+    \hline
+    ラベル7   & 0  & 0       & 0         & 0\\
+    \hline
+    ラベル8   & 0  & 0       & 0         & 0\\
+    \hline
+    ラベル9   & 0  & 0       & 0         & 0\\
+    \hline
+    \end{tabular}
+\end{table}
+
+\begin{table}[H]
+  \caption{766件のレビューによる評価}
+  \label{table3}
+  %\scriptsize
+  \centering
+  \begin{tabular}{|l|l|l|l|l|}
+    \hline
+    & accuracy & recal & precision & f1 score \\
+    \hline
+    ラベル1   & 0  & 0       & 0         & 0\\
+    \hline
+    ラベル2  & 0  & 0       & 0         & 0\\
+    \hline
+    ラベル3   & 0  & 0       & 0         & 0\\
+    \hline
+    ラベル4  & 0  & 0       & 0         & 0\\
+    \hline
+    ラベル5   & 0  & 0       & 0         & 0\\
+    \hline
+    ラベル6   & 0  & 0       & 0         & 0\\
+    \hline
+    ラベル7   & 0  & 0       & 0         & 0\\
+    \hline
+    ラベル8   & 0  & 0       & 0         & 0\\
+    \hline
+    ラベル9   & 0  & 0       & 0         & 0\\
+    \hline
+    \end{tabular}
+\end{table}
+
+\begin{table}[H]
+  \caption{766件各ラベルに重みを加えた評価}
+  \label{table4}
+  %\scriptsize
+  \centering
+  \begin{tabular}{|l|l|l|l|l|}
+    \hline
+    & accuracy & recal & precision & f1 score \\
+    \hline
+    ラベル1   & 0  & 0       & 0         & 0\\
+    \hline
+    ラベル2  & 0  & 0       & 0         & 0\\
+    \hline
+    ラベル3   & 0  & 0       & 0         & 0\\
+    \hline
+    ラベル4  & 0  & 0       & 0         & 0\\
+    \hline
+    ラベル5   & 0  & 0       & 0         & 0\\
+    \hline
+    ラベル6   & 0  & 0       & 0         & 0\\
+    \hline
+    ラベル7   & 0  & 0       & 0         & 0\\
+    \hline
+    ラベル8   & 0  & 0       & 0         & 0\\
+    \hline
+    ラベル9   & 0  & 0       & 0         & 0\\
+    \hline
+    \end{tabular}
+\end{table}
 
 投稿論文に関する規定には，必ず満たさなければいけない「必須要件」と，賞選考のために満たすことを前提とする要件の2種類がある．
 本節では，必ず満たす必要のある「必須要件」について述べる．
@@ -145,46 +273,6 @@ LaTeX版の文書クラス (\code{nlp*.cls}) は，東京大学宮尾研究室 �
 \end{itemize}
 
 
-\paragraph{Word版}
-LaTeX版で定義された文書クラスと同等のテンプレートを実現するため以下のような定義を行っている．
-これらを変更することは禁止とする．
-\begin{itemize}
-    \item 用紙サイズはA4，組版は2段組とする．
-    \item フォントサイズは以下のように定める．
-    \begin{itemize}
-        \item 論文表題: 16\,pt
-        \item 著者名: 10--11\,pt
-        \item 大見出し: 14\,pt
-        \item 中見出し: 12\,pt
-        \item 小見出し: 11\,pt
-        \item 本文: 10\,pt
-        \item その他本文中の数式などの文字: 10\,pt
-        \item 図表等のキャプション: 10\,pt
-        \item 上記以外のクラス，例えばアルゴリズムなどを記述する場合の文字: 10\,pt以上
-    \end{itemize}
-    \item 行数は45行, 各行の文字数は全角23文字
-    \item ルビを振る場合，行間を固定値とし，その値を14.9\,ptとする．設定する場合，「段落」$\xrightarrow{}$「インデントと行間の変更」$\xrightarrow{}$「行間」から指定する．
-\end{itemize}
-また，フォントについては以下のように設定している．
-\begin{itemize}
-\item タイトル，見出しのフォントはMSゴシック + Arial
-\item 本文のフォントはMS明朝 + Times New Roman，強調はMSゴシック
-\end{itemize}
-
-
-\subsection{Writing in English}
-This paragraph shows an English sample.
-There is no problem with writing your manuscript in English.
-If you write in LaTeX, please use the distributed document class with the \code{english} option:
-\begin{quote}
-\verb|\documentclass[|\\
-\verb|  platex, dvipdfmx, english]{nlp2022}|
-\end{quote}
-Any changes on the document class (\code{.cls}) are prohibited.
-If you write in Microsoft Word, please use the distributed sample file without changing its layout.
-Using ``Times New Roman'' is suggested.
-
-なお英語での原稿作成について，LaTeX版の場合は配布する文書クラスを用いて記載すれば問題ない．Word版の場合は配布テンプレートを用いて，レイアウト等については変更しないこと．本文は，文書クラスで規定される通りTimes New Romanで記載のこと．
 
 
 
@@ -411,32 +499,5 @@ Word版では「参考資料$\xrightarrow{}$引用文献の挿入」を利用す
 セクション名と文章は十分な間隔があり綺麗に整形される．ただし，\code{lines}の数字は手動で調整が必要となる．
 
 
-\subsection{色つけ}
-投稿論文の原稿への色つけに関しては特に規定を設けない．
-図表，本文も含めて，読者がより理解しやすいと著者が判断するのであれば，著者の裁量で自由に行ってよい．
-
-\subsection{hyperref}
-論文内の参考文献，式，セクション等へのハイパーリンクを埋め込みたい場合は，著者の裁量で自由に行うことができる．
-
-
-\subsection{Overleaf}
-原稿執筆時にOverleafを利用して作成する人が多いと思われるが，特定のツールの使い方を年次大会で公式にサポートはしない．
-ただし，利用時のTIPSとして，年次大会配布のファイルを置いただけでは日本語環境が整っていないという意味でコンパイルできない場合がある．
-その場合は，\code{latexmkrc}を用意し，そこに日本語用の設定を記載する．
-詳細はインターネットで検索すれば多くの情報を見つけられるので，そちらに譲る．
-コンパイラはLaTeXを選択する．
-
-\section{ダミーテキスト}
-本節は以下ダミーテキストである．
-
-\subsection{サブセクション1}
-このサブセクションはダミーテキストである．
-\jalipsum[1]{wagahai}
-
-\subsubsection{サブサブセクション1}
-
-\paragraph{パラグラフ}
-ダミーテキストである．
-\jalipsum[3]{wagahai}
 
 \end{document}
