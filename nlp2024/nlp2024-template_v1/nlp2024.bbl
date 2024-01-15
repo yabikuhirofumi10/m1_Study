@@ -1,4 +1,4 @@
-\begin{thebibliography}{10}
+\begin{thebibliography}{1}
 
 \bibitem{Article_02}
 山澤美由紀, 吉村宏樹.
@@ -26,31 +26,16 @@ Hong Hong, Di~Xu, G．AlanWang, WeiguoFan．
 消費者庁.
 \newblock 【本文】令和5年版 消費者白書, 2024.
 
-\bibitem{Article_01}
-FirstName LastName.
-\newblock Title of the article.
-\newblock {\em Journal of Natural Language Processing}, Vol.~13, No.~1, pp.
-  251--258, 2006.
+\bibitem{Article_06}
+Jacob Devlin, Ming{-}Wei Chang, Kenton Lee, and Kristina Toutanova.
+\newblock {BERT:} pre-training of deep bidirectional transformers for language
+  understanding.
+\newblock {\em CoRR}, Vol. abs/1810.04805, , 2018.
 
-\bibitem{Book_02}
-FirstNameA LastNameA, FirstNameB LastNameB, FirstNameC LastNameC, and
-  FirstNameD LastNameD.
-\newblock {\em Title of The Book}.
-\newblock The Association for Natural Language Processing, 1988.
-
-\bibitem{Inproc_03}
-著者氏名1, 著者氏名2, 著者氏名3.
-\newblock 論文タイトル.
-\newblock  プロシーディングスの名前, 1986.
-
-\bibitem{Techrep_05}
-著者氏名1, 著者氏名2, 著者氏名3, 著者氏名4.
-\newblock 技報タイトル.
-\newblock Technical report, 出版者, 1985.
-
-\bibitem{Web_06}
-著者氏名.
-\newblock ホームページタイトル, 2017.
-\newblock \url{http://www.pluto.ai.kyutech.ac.jp/NLP/}.
+\bibitem{Article_07}
+Milton Rokeach.
+\newblock The nature of human values.
+\newblock {\em Contemporary Sociology}, Vol.~5, No.~1, pp. 13--16 (4 pages),
+  1976.
 
 \end{thebibliography}
